@@ -21,8 +21,8 @@ sbom.py assumes CLOUDPASSAGEDICT is setup as an shell Environment variable in th
 2. sbom_helpers:initialize() initializes a state dictionary with 11 static key/value pairs and runs sbom_helpers:get_keys() to obtain the API keys and puts them also in the state dictionary.
 3. using the python routing os, sbom_helpers:get_keys() gets the API keys from the environment variable CLOUDPASSAGEDICT after converting the string to a dict
 4. sbom() loops thru the groups:
-  4.1 sbom() initializes the state dictionary for this group using sbom_helpers:svr_grp_init()
-  4.2 sbom() checks there are still servers to go and calls sbom_helpers:current_auth() to validate auth has not timed out
+4.1 sbom() initializes the state dictionary for this group using sbom_helpers:svr_grp_init()
+4.2 sbom() checks there are still servers to go and calls sbom_helpers:current_auth() to validate auth has not timed out
     4.2.1 sbom_helpers:current_auth() gets current time using python time.time() and compares to expire time which was stored in state dictionary each time sbom_helpers:get_auth() is reinitialized. If expired (or within 10s of expiring to minimize race conditions), sbom_helpers:current_auth() runs sbom_helpers:get_auth() to reinitialize.
   4.3 sbom() calls sbom_helpers:process_page_servers() to get another page of servers, printing a "." (without newline) for each page so user knows somehthing is happening
     4.3.1 sbom_helpers:process_page_servers() calls the CloudPassage API to pull a page of a list of servers using the python3:requests.get() module
