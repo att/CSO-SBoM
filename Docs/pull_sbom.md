@@ -17,7 +17,7 @@ which in turn import several standard modules.
 
 sbom.py assumes CLOUDPASSAGEDICT is setup as an shell Environment variable in the form of a string representation of a python dictionary where the key is the name of the Cloud Passage group and the value is 3-tuple e.g. CLOUDPASSAGEDICT='{ "group1" : ("what", "key1", "000..0"), ..., "groupN" : ("what", "keyN", "000..0") }'
 
-* 1. when python3 sbom.py is run, sbom() begins by calling sbom_helpers:initialize() to initialize a state dictionary.
+* 1 when python3 sbom.py is run, sbom() begins by calling sbom_helpers:initialize() to initialize a state dictionary.
 * 2. sbom_helpers:initialize() initializes a state dictionary with 11 static key/value pairs and runs sbom_helpers:get_keys() to obtain the API keys and puts them also in the state dictionary.
 * 3. using the python routing os, sbom_helpers:get_keys() gets the API keys from the environment variable CLOUDPASSAGEDICT after converting the string to a dict
 * 4. sbom() loops thru the groups:
