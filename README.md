@@ -1,12 +1,5 @@
 ## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
 
-To Do List:
-* do each of these or make issue for each
-* issues in 3
-* make an issue for each of 4.n,5
-
-
-
 # Astra-SBoM
 Routines to assist in creating and using Software Bill of Materials for Astra.
 This is a work in progress and probably
