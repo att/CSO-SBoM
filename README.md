@@ -13,8 +13,7 @@ For license info see [LICENSE](./LICENSE).
 * [1 Ground Rules](#1-ground-rules)
   * [1.1 License](#11-license)
   * [1.2 Code of Conduct](#12-code-of-conduct)
-  * [1.3 Collective Code Construction Contract](#13-collective-code-constru
-ction-contract)
+  * [1.3 Collective Code Construction Contract](#13-collective-code-construction-contract)
   * [1.4 Style Guide](#14-style-guide)
   * [1.5 Maintainers](#15-maintainers)
 * [2. The case for Software Bill of Materials](#2-the-case-for-software-bill-of-materials)
