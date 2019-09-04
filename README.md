@@ -2,14 +2,6 @@
 
 To Do List:
 * do each of these or make issue for each
-* copy in correct att license file
-* reference license in 1.1
-* write code of Conduct
-* write C4
-* write style Guide
-* copy in correct Maintainers wording
-* write contribution Guidelines
-* update sbom case based on new ntia docs
 * issues in 3
 * make an issue for each of 4.n,5
 
@@ -19,15 +11,17 @@ To Do List:
 Routines to assist in creating and using Software Bill of Materials for Astra.
 This is a work in progress and probably
 not ready to be much use to others as yet, but hopefully will be soon.
-If you'd like to help, read Contribution Guidelines (hotlink this).
-For license info see license (hotlink this)
+If you'd like to help, read
+[1.3 Collective Code Construction Contract](#13-collective-code-constru
+ction-contract).
+For license info see [LICENSE](./LICENSE).
 
 # Contents
 * [1 Ground Rules](#1-ground-rules)
   * [1.1 License](#11-license)
   * [1.2 Code of Conduct](#12-code-of-conduct)
-  * [1.3 Collective Code Construction Contract (C4)](#13-collective-code-constru
-ction-contract-C4)
+  * [1.3 Collective Code Construction Contract](#13-collective-code-constru
+ction-contract)
   * [1.4 Style Guide](#14-style-guide)
   * [1.5 Maintainers](#15-maintainers)
 * [2. The case for Software Bill of Materials](#2-the-case-for-software-bill-of-materials)
@@ -57,7 +51,7 @@ ction-contract-C4)
 This section contains the basics on using and contributing to this project.
 
 ## 1.1 License
-copy wording of existing att repo and reference [LICENSE](./LICENSE) file
+MIT License. See [LICENSE](./LICENSE).
 
 ## 1.2 Code of Conduct
 TL;DR - Don't be a jerk!
@@ -67,7 +61,7 @@ who would like to get involved,
 a [Code of Conduct](./Docs/code_of_conduct.md) was adopted.
 Please read and adhere to it.
 
-## 1.3 Collective Code Construction Contract (C4)
+## 1.3 Collective Code Construction Contract
 The [Astra-SBoM Collective Code Construction Contract](./Docs/collective_code_construction_contract.md)
 (C4) provides a standard process for contributing, evaluating and discussing improvements on this software project.
 It defines specific SDLC requirements
@@ -84,9 +78,9 @@ blah blah
 See [Style Guide](./Docs/style_guide.md).
 
 ## 1.5 Maintainers
-copy wording of existing att repo.
-Put in Duncan
-Add Tony once gets id
+This repo is maintained by:
+* Duncan Sparrell https://github.com/sparrell
+* What is Tony's github id?
 
 # 2. The case for Software Bill of Materials
 fill in from ntia and blog
