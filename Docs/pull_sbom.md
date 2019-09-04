@@ -23,7 +23,7 @@ sbom.py assumes CLOUDPASSAGEDICT is setup as an shell Environment variable in th
 4. sbom() loops thru the groups:
 4.1. sbom() initializes the state dictionary for this group using sbom_helpers:svr_grp_init()
 4.2. sbom() checks there are still servers to go and calls sbom_helpers:current_auth() to validate auth has not timed out
-    4.2.1 sbom_helpers:current_auth() gets current time using python time.time() and compares to expire time which was stored in state dictionary each time sbom_helpers:get_auth() is reinitialized. If expired (or within 10s of expiring to minimize race conditions), sbom_helpers:current_auth() runs sbom_helpers:get_auth() to reinitialize.
+4.2.1. sbom_helpers:current_auth() gets current time using python time.time() and compares to expire time which was stored in state dictionary each time sbom_helpers:get_auth() is reinitialized. If expired (or within 10s of expiring to minimize race conditions), sbom_helpers:current_auth() runs sbom_helpers:get_auth() to reinitialize.
   4.3 sbom() calls sbom_helpers:process_page_servers() to get another page of servers, printing a "." (without newline) for each page so user knows somehthing is happening
     4.3.1 sbom_helpers:process_page_servers() calls the CloudPassage API to pull a page of a list of servers using the python3:requests.get() module
     4.3.2 sbom_helpers:process_page_servers() loops thru the list of servers retrieved
