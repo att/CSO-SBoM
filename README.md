@@ -38,6 +38,11 @@ For license info see [LICENSE](./LICENSE).
 * [6.Examples](#6-examples)
   * [6.1 Pull CloudPassage](#61-pull-cloudpassage)
   * [6.2 One day pyt into GraphDB](#62-one-day-pyt-into-graphdb)
+  * [6.3 Make an image](#6.3-make-an-image)
+  * [6.4 Query one day](#6.4-query-one-day)
+  * [6.5 Query to compare two days](#6.5-query-to-compare-two-days)
+  * [6.6 Histogram across known dates](#6.6-histogram-across-known-dates)
+
 
 # 1. Ground Rules
 This section contains the basics on using and contributing to this project.
@@ -125,4 +130,38 @@ fill in from ntia and blog
 * pythonw make_gdb.py 2019.04.01 ##replacing date of pyt file to create graphdb for
 * verify GraphDB/2019.04.01.gdb (but with today's date replacing 2019.04.01) was created and is non-zero.
 
-## 6.3
+## 6.3 Make an image
+* of cve/package/server map
+
+## 6.4 Query one day
+* number servers
+* stacked bar chart by group
+* number packages
+* number CVE's
+* number CVE's > CVSS=N
+* number servers with CVE of CVSS >N
+* number supressed CVE's
+* number servers with supressed CVE's
+* number servers with supressed CVE of CVSS >N
+
+## 6.5 Query to compare two days
+* number servers
+* stacked bar chart by group
+* number packages
+* number CVE's
+* number CVE's > CVSS=N
+* number servers with CVE of CVSS >N
+* number supressed CVE's
+* number servers with supressed CVE's
+* number servers with supressed CVE of CVSS >N
+
+## 6.6 Histogram across known dates
+* number servers
+* stacked bar chart by group
+* number packages
+* number CVE's
+* number CVE's > CVSS=N
+* number servers with CVE of CVSS >N
+* number supressed CVE's
+* number servers with supressed CVE's
+* number servers with supressed CVE of CVSS >N
