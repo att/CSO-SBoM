@@ -14,7 +14,7 @@ from sbom_helpers import mypprint
 if( len(sys.argv) != 3 ):
    print("There should be two arguments")
    print("first arg is date eg 2019.03.16")
-   print("2nd arg is server eg 1cd8884a427f11e887244d92208fe081")
+   print("2nd arg is server eg 84a421cd887f11e887244dfe08192208")
    exit()
 else:
    d = sys.argv[1]
