@@ -134,6 +134,56 @@ fill in from ntia and blog
 * of cve/package/server map
 
 ## 6.4 Query one day
+### 6.4.1 server info
+* pythonw query1_svr.py {date} {server}
+    * where {date} is date to one you want to query eg '2019.04.01'
+    * where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
+* this returns a printout of information:
+    * filename of gdb file
+    * server ID (as cloudpassage know it)
+    * server name
+    * group server is member of
+    * server hostname
+    * Number of package/versions
+    * Number of packages
+      * note (package/versions minus packages) is the number 'extra' versions eg 775 package/versions minus 767 packages means there are 8 'extra' versions. This may be one package with 8 versions or 8 packages with two versions or anything inbetween
+    * A list of the packages with multiple versions
+    * A list of the supressed CVE's with their CVSS scores, sorted  CVSS/Hi-Lo
+    * The number of packages with no CVE's
+    * the number of packages with cve of cvss=10
+    * a list of the packages from previous bullet
+    * the number of packages with cve of cvss <10 & >=7
+    * a list of the packages from previous bullet
+    * the number of packages with cve of cvss <7 & >=5
+    * the number of packages with cve of cvss <5 & >=0
+
+### 6.4.3 multiversion
+* pythonw query1_multiver.py {date} {server}
+    * where {date} is date to one you want to query eg '2019.04.01'
+* this returns a printout of information:
+    * the number of servers with no multiver pakages
+    * the number of servers with at least one multi-ver-package
+    * bucket by how many extra packages-versions each server has:
+      * 6 servers has 0 extra package-versions
+      * 4 servers has 4 extra package-versions
+      * ...
+      * 1 servers has 31 extra package-versions
+    * bucket by how many packages have extra versions each server has. Subtle difference from previous. For example second bullet below is same 4 servers as second bullet in previous section. What it means is there is one package with 5 version - ie all 4 extra package-verions are for the same package.
+      * 6 servers has 0 mult-ver packages
+      * 4 servers has 1 mult-ver packages
+      * ...
+      * 1 servers has 28 mult-ver packages
+    * list the servers with zero extra package-versions
+    * List the number of servers with a particular set of extra versions for a package. eg:
+      * (4, "bash.x86_64/[':4.1.2-41.el6_8', ':4.1.2-48.el6']")
+      * (1, "perl-Pod-Simple.x86_64/[':1:3.13-141.el6_7.1', ':1:3.13-144.el6']")
+      * meaning 4 servers have 4.1.2-41.el6_8 and 4.1.2-48.el6 versions of bash.x86_64; and 1 server has 1:3.13-141.el6_7.1 and 1:3.13-144.el6 versions of perl-Pod-Simple.x86_64 package
+
+
+
+
+
+### 6.4.4 fill in rest
 * number servers
 * stacked bar chart by group
 * number packages
