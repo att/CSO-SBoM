@@ -77,7 +77,7 @@ See [Style Guide](./Docs/style_guide.md).
 ## 1.5 Maintainers
 This repo is maintained by:
 * Duncan Sparrell https://github.com/sparrell
-* What is Tony's github id?
+* Tony Librera https://github.com/tlibrera1
 
 # 2. The case for Software Bill of Materials
 fill in from ntia and blog
