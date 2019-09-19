@@ -5,8 +5,8 @@ from load_db import load_graph
 from sbom_helpers import mypprint
 from load_db import svr_pkgs
 from load_db import intermediate
-from load_db import hostname
-from load_db import group
+from load_db import get_hostname
+from load_db import get_group
 
 
 ## Load one day graph based on input parameter
@@ -107,7 +107,7 @@ print("===============")
 ## print the servers with zero extras
 out = "the following servers have zero extras:"
 print(out)
-annotated_clean_ver_list = [[ (group(s,graphdata),s,hostname(s,graphdata)) for s in clean_ver_list ]]
+annotated_clean_ver_list = [[ (group(s,graphdata),s,get_hostname(s,graphdata)) for s in clean_ver_list ]]
 annotated_clean_ver_list.sort()
 mypprint(annotated_clean_ver_list)
 

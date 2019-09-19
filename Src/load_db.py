@@ -3,7 +3,7 @@
 ## routines for loading data into db
 
 from sbom_helpers import mypprint
-from analyze_data import file_to_data
+from sbom_helpers import file_to_data
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -294,8 +294,12 @@ def hostname(server, graphdata):
     return( intermediate(graphdata, 'type_hostname', server) )
 
 ## return group of a server
-def group(server, graphdata):
+def get_group(server, graphdata):
     return( intermediate(graphdata, 'type_group', server) )
+
+## return list of groups
+def get_groups(graphdata):
+    return( list(graphdata.neighbors("type_group")) )
 
 ## local helper routines
 
