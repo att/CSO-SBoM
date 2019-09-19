@@ -150,7 +150,11 @@ fill in from ntia and blog
 
 
 ## 6.4 Query one day
-### 6.4.1 server info
+### 6.4.1 list server by group
+* python3 query1_svr_list.py {date}
+  * where {date} is date to one you want to query eg '2019.04.01'
+  * returns a print of a python dictionary with key=group, value=serverlist
+### 6.4.2 server info
 * python3 query1_svr.py {date} {server}
     * where {date} is date to one you want to query eg '2019.04.01'
     * where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
