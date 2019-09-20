@@ -120,22 +120,42 @@ fill in from ntia and blog
 # 6. Examples
 
 ## 6.1 Pull CloudPassage
-* set shell env variable with Cloud Passage API keys e.g.
-  * export CLOUDPASSAGEDICT='{ "group1" : ("what", "key1", "000..0"), ..., "groupN" : ("what", "keyN", "000..0") }'
-* pythonw sbom.py
-* verify Data/svr.2019.04.01.pyt was created and is non-zero. But with today's date replacing 2019.04.01. Note UTC is used for determining "today" (so it might be tomorrow or yesterday depending on your timezone).
+* set shell env variables:
+  * export CLOUDPASSAGEDICT='{ "groupname1" : ("ignore", "keyname", "keyvalue"), ..., "lastgrp" : ("mycomment", "02468ace", "13579bdf02468ace13579bdf02468ace") }'
+  * export DATAPATH='path to directory to put pyt data'
+* python3 sbom.py
+* verify $DATAPATH/svr.2019.04.01.pyt was created and is non-zero.
+  * But with today's date replacing 2019.04.01.
+  * Note UTC is used for determining "today"
+    * (so it might be tomorrow or yesterday depending on your timezone).
 * for a more detailed view of the code traversed, see [pull_sbom.md](./Docs/pull_sbom.md)
 
 ## 6.2 One day pyt into GraphDB
-* pythonw make_gdb.py 2019.04.01 ##replacing date of pyt file to create graphdb for
+* set shell env variables:
+  * export DATAPATH='path to directory to get pyt data'
+  * export  GDBPATH='path to directory to put gdb file'
+* python3 make_gdb.py 2019.04.01 ##replacing date of pyt file to create graphdb for
 * verify GraphDB/2019.04.01.gdb (but with today's date replacing 2019.04.01) was created and is non-zero.
 
 ## 6.3 Make an image
-* of cve/package/server map
+### 6.3.1 CVE/packages/servers
+* given a cve show affected packages on affected servers
+### 6.3.2 servers over time by groups
+* given a list of dates, show how many servers in each group in stacked bar graph
+* python3 queryn.numsvrs.py
+* prerequisites:
+  - export GDBPATH='path to directory of GraphDb files'
+  - export ANLPATH='path to directory to put image and data'
+  - export DATELIST='["date1", "date2", ...]
+
 
 ## 6.4 Query one day
-### 6.4.1 server info
-* pythonw query1_svr.py {date} {server}
+### 6.4.1 list server by group
+* python3 query1_svr_list.py {date}
+  * where {date} is date to one you want to query eg '2019.04.01'
+  * returns a print of a python dictionary with key=group, value=serverlist
+### 6.4.2 server info
+* python3 query1_svr.py {date} {server}
     * where {date} is date to one you want to query eg '2019.04.01'
     * where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
 * this returns a printout of information:
@@ -158,7 +178,7 @@ fill in from ntia and blog
     * the number of packages with cve of cvss <5 & >=0
 
 ### 6.4.3 multiversion
-* pythonw query1_multiver.py {date} {server}
+* python3 query1_multiver.py {date} {server}
     * where {date} is date to one you want to query eg '2019.04.01'
 * this returns a printout of information:
     * the number of servers with no multiver pakages
@@ -206,8 +226,10 @@ fill in from ntia and blog
 * number servers with supressed CVE of CVSS >N
 
 ## 6.6 Histogram across known dates
-* number servers
-* stacked bar chart by group
+## 6.6.1 Histogram of # servers(by group) over time
+* python3 queryn_numsvrs.py outfile
+## 6.6.2 Histogram of # extra versions over time
+## 6.6.n
 * number packages
 * number CVE's
 * number CVE's > CVSS=N
