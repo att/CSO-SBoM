@@ -226,8 +226,10 @@ fill in from ntia and blog
 * number servers with supressed CVE of CVSS >N
 
 ## 6.6 Histogram across known dates
-* number servers
-* stacked bar chart by group
+## 6.6.1 Histogram of # servers(by group) over time
+* python3 queryn_numsvrs.py outfile
+## 6.6.2 Histogram of # extra versions over time
+## 6.6.n
 * number packages
 * number CVE's
 * number CVE's > CVSS=N

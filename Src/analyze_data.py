@@ -8,9 +8,12 @@ from sbom_helpers import get_gdbpath
 from sbom_helpers import get_datelist
 from sbom_helpers import validate_file_access
 from sbom_helpers import file_to_data
+from sbom_helpers import get_anlpath
 from load_db import load_graph
 from load_db import get_groups
 from load_db import intermediate
+import numpy
+import matplotlib.pyplot as plt
 
 def print_dict_struc(data):
     groups = data.keys()
@@ -254,3 +257,75 @@ def multi_date_number_servers():
         g = intermediate(one_day_graph, 'type_group', svr)
         data[d][g] += 1
     return(data)
+
+def stacked_bar_image(data, filename):
+    ## from input data, create a stacked bar chart image, store in outfile
+    outfile = get_anlpath() + filename
+
+    dates = list( data.keys() )
+    dates.sort()
+
+    groups = [ g for g in data[dates[0]].keys() if g != 'total' ]
+    groups.sort()
+
+
+    N = len(dates)
+    ind = numpy.arange(N)
+
+    ## list of series of length equal to the number of groups
+    ##    which each series of length equal to the number of dates
+
+    seriesList = []
+    for g in groups:
+      this_group_series = []
+      for d in dates:
+        this_group_series.append( data[d][g] )
+      this_group_tuple = tuple(this_group_series)
+      seriesList.append( this_group_tuple )
+
+    ## build the bottom of each bar based on previous series
+    ##     initialize bottoms with zeros for each column
+    bottoms = []
+    this_list = []
+    ld = range( len(dates) )
+    for d in ld: this_list.append(0)
+    bottoms.append( this_list )
+    ##     fill in with bottom + prev value
+    for s in range(1, len(seriesList) ):
+      this_list = [ bottoms[s-1][d] + seriesList[s-1][d] for d in ld ]
+      bottoms.append( this_list )
+
+    plt.figure(figsize=(10,8))
+    bars = []
+    for i in range(len(seriesList)):
+      bars.append( plt.bar(ind, seriesList[i], bottom=bottoms[i] ) )
+
+    plt.title('Servers by Date')
+    plt.ylabel('Number of Servers')
+    plt.xlabel('Dates')
+    plt.xticks(ind, tuple(dates))
+    plt.legend(tuple( [ p[0] for p in bars ] ), tuple(groups))
+
+    plt.savefig(outfile)
+
+def bar_image(data, filename):
+    ## from input data, create a bar chart image, store in outfile
+    outfile = get_anlpath() + filename
+
+    keys_values = list(data.items())
+    keys_values.sort()
+
+    x_labels = [a for (a,b) in keys_values]
+    x_pos = numpy.arange(len(x_labels))
+
+    y_data = [b for (a,b) in keys_values]
+
+    plt.figure(figsize=(10,8))
+    plt.bar(x_pos, y_data)
+
+    plt.title('Extra package_versions by Date')
+    plt.ylabel('Number of extras')
+    plt.xlabel('Dates')
+    plt.xticks(x_pos, tuple(x_labels))
+
+    plt.savefig(outfile)

@@ -290,7 +290,7 @@ def pkgs_with_no_cve(pkg_cve):
     return(output)
 
 ## return hostname of a server
-def hostname(server, graphdata):
+def get_hostname(server, graphdata):
     return( intermediate(graphdata, 'type_hostname', server) )
 
 ## return group of a server
