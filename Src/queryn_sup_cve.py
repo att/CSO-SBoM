@@ -4,9 +4,10 @@ import sys
 from load_db import load_graph
 from sbom_helpers import mypprint
 from load_db import svr_pkgs
-from load_db import intermediate
+from load_db import all_intermediates
 from load_db import get_hostname
 from load_db import get_group
+from load_db import pkg_subset
 from sbom_helpers import get_gdbpath
 from sbom_helpers import get_datelist
 from sbom_helpers import validate_file_access
@@ -41,19 +42,25 @@ validate_file_access([f for (d,f) in filelist])
 ## count of number of supressed cve packages
 supr = {}
 
-
 ## now process each file
 for (d,filename) in filelist:
   supr[d] = 0
   graphdata = load_graph(filename)
 
-  ## loop thru all servers
-  svrs = graphdata.neighbors("type_server")
-  for svr in svrs:
-    scp = svr_cve_pkgs(graphdata, svr)
-    sup_cves = pkg_cve_supr(scp)
-    supr[d] += len(sup_cves)
+  ## First make a list of pkg_ver_cve
+  ##    i.e. all nodes connected to "type_supressed"
+  pvc_list = graphdata.neighbors("type_suppressed")
+
+  ## count all servers connected
+  for pvc in pvc_list:
+      svrs = all_intermediates(graphdata, pvc, "type_server")
+      supr[d] += 1
 
 print(supr)
 
-bar_image(supr, outfile)
+params = {}
+params['filename'] = outfile
+params['title'] = 'Package_versions with supressed CVE, by Date'
+params['ylabel'] = 'Package_versions with supressed CVE'
+params['xlabel'] = 'Dates'
+bar_image(supr, params)

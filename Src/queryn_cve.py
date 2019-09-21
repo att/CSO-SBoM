@@ -13,6 +13,7 @@ from sbom_helpers import validate_file_access
 from analyze_data import bar_image
 from load_db import svr_cve_pkgs
 from load_db import pkg_cve_supr
+from load_db import pkg_cve_cvss_threshold
 
 ## Load each day graph
 ## for each server, sum how many supressed cve packages
