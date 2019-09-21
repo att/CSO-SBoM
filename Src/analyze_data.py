@@ -258,15 +258,20 @@ def multi_date_number_servers():
         data[d][g] += 1
     return(data)
 
-def stacked_bar_image(data, filename):
+def stacked_bar_image(data, params):
     ## from input data, create a stacked bar chart image, store in outfile
+    filename = params['filename']
     outfile = get_anlpath() + filename
+    img_title = params['title']
+    img_ylabel = params['ylabel']
+    img_xlabel = params['xlabel']
 
     dates = list( data.keys() )
     dates.sort()
 
     groups = [ g for g in data[dates[0]].keys() if g != 'total' ]
     groups.sort()
+    groups.reverse()
 
 
     N = len(dates)
@@ -300,17 +305,21 @@ def stacked_bar_image(data, filename):
     for i in range(len(seriesList)):
       bars.append( plt.bar(ind, seriesList[i], bottom=bottoms[i] ) )
 
-    plt.title('Servers by Date')
-    plt.ylabel('Number of Servers')
-    plt.xlabel('Dates')
+    plt.title(img_title)
+    plt.ylabel(img_ylabel)
+    plt.xlabel(img_xlabel)
     plt.xticks(ind, tuple(dates))
     plt.legend(tuple( [ p[0] for p in bars ] ), tuple(groups))
 
     plt.savefig(outfile)
 
-def bar_image(data, filename):
+def bar_image(data, params):
     ## from input data, create a bar chart image, store in outfile
+    filename = params['filename']
     outfile = get_anlpath() + filename
+    img_title = params['title']
+    img_ylabel = params['ylabel']
+    img_xlabel = params['xlabel']
 
     keys_values = list(data.items())
     keys_values.sort()
@@ -323,9 +332,9 @@ def bar_image(data, filename):
     plt.figure(figsize=(10,8))
     plt.bar(x_pos, y_data)
 
-    plt.title('Extra package_versions by Date')
-    plt.ylabel('Number of extras')
-    plt.xlabel('Dates')
+    plt.title(img_title)
+    plt.ylabel(img_ylabel)
+    plt.xlabel(img_xlabel)
     plt.xticks(x_pos, tuple(x_labels))
 
     plt.savefig(outfile)

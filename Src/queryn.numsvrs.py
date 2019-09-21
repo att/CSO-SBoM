@@ -33,4 +33,9 @@ else:
 
 data = multi_date_number_servers()
 
-stacked_bar_image(data, f)
+params = {}
+params['filename'] = f
+params['title'] = 'Servers by Date'
+params['ylabel'] = 'Number of Servers'
+params['xlabel'] = 'Dates'
+stacked_bar_image(data, params)

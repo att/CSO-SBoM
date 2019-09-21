@@ -12,7 +12,7 @@ from sbom_helpers import get_datelist
 from sbom_helpers import validate_file_access
 from analyze_data import bar_image
 
-## Load each day graph 
+## Load each day graph
 ## for each server, sum how many extra package_versions
 ##    print histogram of number of 'extras'
 
@@ -23,7 +23,6 @@ from analyze_data import bar_image
 ## initialize from env
 gdbpath = get_gdbpath()
 datelist = get_datelist()
-
 
 if( len(sys.argv) != 2 ):
    print("There should be one argument, filename for output image")
@@ -59,4 +58,9 @@ for (d,filename) in filelist:
 
 print(extra_sum)
 
-bar_image(extra_sum, outfile)
+params = {}
+params['filename'] = outfile
+params['title'] = 'Extra package_versions by Date'
+params['ylabel'] = 'Number of extras'
+params['xlabel'] = 'Dates'
+bar_image(extra_sum, params)
