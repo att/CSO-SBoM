@@ -265,6 +265,7 @@ def stacked_bar_image(data, params):
     img_title = params['title']
     img_ylabel = params['ylabel']
     img_xlabel = params['xlabel']
+    colors = params['colors']
 
     dates = list( data.keys() )
     dates.sort()
@@ -303,7 +304,7 @@ def stacked_bar_image(data, params):
     plt.figure(figsize=(10,8))
     bars = []
     for i in range(len(seriesList)):
-      bars.append( plt.bar(ind, seriesList[i], bottom=bottoms[i] ) )
+      bars.append( plt.bar(ind, seriesList[i], bottom=bottoms[i], color=colors[i] ) )
 
     plt.title(img_title)
     plt.ylabel(img_ylabel)
