@@ -84,10 +84,10 @@ for (d,filename) in filelist:
   svr5 = svr_subset(graphdata, pkg5)
   svr0 = svr_subset(graphdata, pkg0)
 
-  cvebins[d]['10'] = len(svr10)
-  cvebins[d]['<10, >=07'] = len(svr7)
-  cvebins[d]['<07, >=05'] = len(svr5)
-  cvebins[d]['<05, >=0'] = len(svr0)
+  cvebins[d]['1. Worst CVSS=10'] = len(svr10)
+  cvebins[d]['2. Critical 7 <= CVSS <10'] = len(svr7)
+  cvebins[d]['3. Medium 5 <= CVSS <7'] = len(svr5)
+  cvebins[d]['4. Low 0 <= CVSS <5'] = len(svr0)
 
 mypprint(cvebins)
 
@@ -96,4 +96,5 @@ params['filename'] = outfilename
 params['title'] = 'Attack Points by Date'
 params['ylabel'] = 'Number of package-ver with CVE across all Servers'
 params['xlabel'] = 'Dates'
+params['colors'] = ['yellow', 'orange', 'red', 'black']
 stacked_bar_image(cvebins, params)
