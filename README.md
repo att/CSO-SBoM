@@ -178,7 +178,7 @@ fill in from ntia and blog
     * the number of packages with cve of cvss <5 & >=0
 
 ### 6.4.3 multiversion
-* python3 query1_multiver.py {date} {server}
+* python3 query1_multiver.py {date}
     * where {date} is date to one you want to query eg '2019.04.01'
 * this returns a printout of information:
     * the number of servers with no multiver pakages
@@ -198,10 +198,6 @@ fill in from ntia and blog
       * (4, "bash.x86_64/[':4.1.2-41.el6_8', ':4.1.2-48.el6']")
       * (1, "perl-Pod-Simple.x86_64/[':1:3.13-141.el6_7.1', ':1:3.13-144.el6']")
       * meaning 4 servers have 4.1.2-41.el6_8 and 4.1.2-48.el6 versions of bash.x86_64; and 1 server has 1:3.13-141.el6_7.1 and 1:3.13-144.el6 versions of perl-Pod-Simple.x86_64 package
-
-
-
-
 
 ### 6.4.4 fill in rest
 * number servers
