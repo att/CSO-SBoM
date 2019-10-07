@@ -41,6 +41,9 @@ num_mul = 0
 ## initialize a dictionary for list of multiver servers
 mvp = {}
 
+## initialize a list for the one version
+one_ver = []
+
 
 ## loop thru all servers
 svrs = graphdata.neighbors("type_server")
@@ -61,10 +64,13 @@ for svr in svrs:
             mvp[svr]['hostname'] = get_hostname(svr,graphdata)
         else:
             num_one_v += 1
+            if p not in one_ver:
+                one_ver.append(p)
     else:
         num_no_v += 1
 
 print("Number of servers without {0} package: {1}".format(p,num_no_v) )
 print("Number of servers with one version {0} package: {1}".format(p,num_one_v) )
+mypprint(one_ver)
 print("Number of servers with multiple versions {0} package: {1}".format(p,num_mul) )
 mypprint(mvp)
