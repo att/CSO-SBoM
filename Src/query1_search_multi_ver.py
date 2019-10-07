@@ -64,8 +64,9 @@ for svr in svrs:
             mvp[svr]['hostname'] = get_hostname(svr,graphdata)
         else:
             num_one_v += 1
-            if p not in one_ver:
-                one_ver.append(p)
+            v = pkg_ver_dict[p]
+            if v not in one_ver:
+                one_ver.append(v)
     else:
         num_no_v += 1
 
