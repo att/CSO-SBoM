@@ -155,11 +155,13 @@ fill in from ntia and blog
   - where {date} is date to one you want to query eg '2019.04.01'
   - prerequisites:
     * export GDBPATH='path to directory of GraphDb files'
-  * returns a print of a python dictionary with key=group, value=serverlist
+  - returns a print of a python dictionary with key=group, value=serverlist
 ### 6.4.2 server info
 * python3 query1_svr.py {date} {server}
-    * where {date} is date to one you want to query eg '2019.04.01'
-    * where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
+    - where {date} is date to one you want to query eg '2019.04.01'
+    - where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
+    - prerequisites:
+      * export GDBPATH='path to directory of GraphDb files'
 * this returns a printout of information:
     * filename of gdb file
     * server ID (as cloudpassage know it)
@@ -181,7 +183,10 @@ fill in from ntia and blog
 
 ### 6.4.3 multiversion
 * python3 query1_multiver.py {date}
-    * where {date} is date to one you want to query eg '2019.04.01'
+    - where {date} is date to one you want to query eg '2019.04.01'
+    - prerequisites:
+      * export GDBPATH='path to directory of GraphDb files'
+
 * this returns a printout of information:
     * the number of servers with no multiver pakages
     * the number of servers with at least one multi-ver-package
