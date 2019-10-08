@@ -41,7 +41,7 @@ else:
 filelist = [ (d, gdbpath + d + ".gdb") for d in datelist ]
 validate_file_access([f for (d,f) in filelist])
 
-## count of number of supressed cve packages
+## dict to hold the data
 cvebins = {}
 
 
