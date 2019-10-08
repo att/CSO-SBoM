@@ -61,10 +61,10 @@ mypprint(ten_cves)
 
 seven_cves = pkg_cve_cvss_threshold(scp, 7, 10)
 l_seven_cves = len(seven_cves)
-print("{0} packages with worst cvss <10 and >=7".format(l_seven_cves))
+print("{0} packages with cvss <10 and >=7".format(l_seven_cves))
 mypprint(seven_cves)
 
 five_cves = len(pkg_cve_cvss_threshold(scp, 5, 7))
-print("{0} packages with worst cvss <7 and >=5".format(five_cves))
+print("{0} packages with cvss <7 and >=5".format(five_cves))
 low_cves = len(pkg_cve_cvss_threshold(scp, 0, 5))
-print("{0} packages with worst cvss <5 and >=0".format(low_cves))
+print("{0} packages with cvss <5 and >=0".format(low_cves))
