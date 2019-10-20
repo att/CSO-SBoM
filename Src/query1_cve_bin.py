@@ -3,19 +3,11 @@
 import sys
 from load_db import load_graph
 from sbom_helpers import mypprint
-from load_db import svr_pkgs
-from load_db import intermediate
-from load_db import get_hostname
-from load_db import get_group
 from load_db import pkg_subset
 from load_db import svr_subset
 from sbom_helpers import get_gdbpath
-from sbom_helpers import get_datelist
 from sbom_helpers import validate_file_access
 from analyze_data import bar_image
-from analyze_data import stacked_bar_image
-from load_db import svr_cve_pkgs
-from load_db import pkg_cve_supr
 
 ## For given day graph
 ## for each server, sum how many cve packages in each cvss bin
