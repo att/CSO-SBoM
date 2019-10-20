@@ -206,7 +206,14 @@ fill in from ntia and blog
       * (1, "perl-Pod-Simple.x86_64/[':1:3.13-141.el6_7.1', ':1:3.13-144.el6']")
       * meaning 4 servers have 4.1.2-41.el6_8 and 4.1.2-48.el6 versions of bash.x86_64; and 1 server has 1:3.13-141.el6_7.1 and 1:3.13-144.el6 versions of perl-Pod-Simple.x86_64 package
 
-### 6.4.4 fill in rest
+### 6.4.4 Bin Server Counts by CVSS score of CVE present
+For a given day, count and bin the cve's.
+* python3 query1_cve_bin.py {date}
+    - where {date} is date to one you want to query eg '2019.04.01'
+    - prerequisites:
+      * export GDBPATH='path to directory of GraphDb files'
+
+### 6.4.5 fill in rest
 * number servers
 * stacked bar chart by group
 * number packages
@@ -237,6 +244,8 @@ fill in from ntia and blog
 * python3 queryn_sup_cve.py outfile
 ## 6.6.4 Histogram of number of attack points over time
 * python3 queryn_cve_bin.py outfile
+## 6.6.5 list dates of raw data and of graphdb
+* python3 queryn_dates.py
 ## 6.6.n
 * number packages
 * number CVE's
@@ -245,3 +254,14 @@ fill in from ntia and blog
 * number supressed CVE's
 * number servers with supressed CVE's
 * number servers with supressed CVE of CVSS >N
+# Day in the life of cyber security evangelist
+1 check what dates have data
+  * python3 queryn_dates.py
+2 if any dates have data but not gdb, process them
+  * python3 make_gdb.py 2019.04.01 ##replacing unprocessed date
+3 if today missing data and it is desired, then get it
+  * python3 sbom.py
+  * python3 make_gdb.py 2019.04.01 ##replacing date with today's
+4 check state of vulnerabilities
+  * ignoring suppressed and clutter for now
+  * python3 check_cve.py 2019.04.01 ##replacing date with today's or whatever
