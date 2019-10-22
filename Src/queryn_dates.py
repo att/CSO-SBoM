@@ -29,6 +29,7 @@ gfilelist = os.listdir(gdbpath)
 gdatelist = [ f[-14:-4] for f in gfilelist if(f[-4:] == '.gdb') ]
 
 unpdates = list(set(ddatelist).difference(gdatelist))
+unpdates.sort()
 
 if(len(unpdates) == 0):
     print('All raw data dates processed into gdb')
@@ -37,4 +38,5 @@ else:
     print(unpdates)
 
 print('gdb dates:')
+gdatelist.sort()
 print(gdatelist)
