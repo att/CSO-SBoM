@@ -38,4 +38,5 @@ params['filename'] = f
 params['title'] = 'Servers by Date'
 params['ylabel'] = 'Number of Servers'
 params['xlabel'] = 'Dates'
+params['colors'] = ['blue', 'purple', 'green', 'orange']
 stacked_bar_image(data, params)
