@@ -35,14 +35,14 @@ For license info see [LICENSE](./LICENSE).
   * [5.2 Design](#52-design)
   * [5.3 Design Decisions](#53-design-decisions)
   * [5.4 SBoM of the SBoM Software](#54-sbom-of-the-sbom-software)
-* [6.Examples](#6-examples)
+* [6. Examples](#6-examples)
   * [6.1 Pull CloudPassage](#61-pull-cloudpassage)
   * [6.2 One day pyt into GraphDB](#62-one-day-pyt-into-graphdb)
   * [6.3 Make an image](#6.3-make-an-image)
   * [6.4 Query one day](#6.4-query-one-day)
   * [6.5 Query to compare two days](#6.5-query-to-compare-two-days)
   * [6.6 Histogram across known dates](#6.6-histogram-across-known-dates)
-
+* [7. Examples](#7-day-in-the-life-of-cyber-security-evangelist)
 
 # 1. Ground Rules
 This section contains the basics on using and contributing to this project.
