@@ -255,15 +255,15 @@ For a given day, count and bin the cve's.
 * number servers with supressed CVE's
 * number servers with supressed CVE of CVSS >N
 # 7. Day in the life of cyber security evangelist
-1 check what dates have data
+1. check what dates have data
   * python3 queryn_dates.py
-2 if any dates have data but not gdb, process them
+2. if any dates have data but not gdb, process them
   * python3 make_gdb.py 2019.04.01 ##replacing unprocessed date
 3 if today missing data and it is desired, then get it
   * python3 sbom.py
   * python3 make_gdb.py 2019.04.01 ##replacing date with today's
-4 check state of vulnerabilities
+4. check state of vulnerabilities
   * ignoring suppressed and clutter for now (query displays with supr and clutter)
   * python3 query1_filt_cve.py 2019.04.01 ##replacing date with today's or whatever
-5 look at some of random Servers
+5. look at some of random Servers
   * python3 query1_svr.py 2019.04.01 id_of_svr
