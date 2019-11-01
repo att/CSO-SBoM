@@ -254,7 +254,7 @@ For a given day, count and bin the cve's.
 * number supressed CVE's
 * number servers with supressed CVE's
 * number servers with supressed CVE of CVSS >N
-# Day in the life of cyber security evangelist
+# 7. Day in the life of cyber security evangelist
 1 check what dates have data
   * python3 queryn_dates.py
 2 if any dates have data but not gdb, process them

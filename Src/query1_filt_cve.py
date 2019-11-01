@@ -9,13 +9,11 @@ from sbom_helpers import get_gdbpath
 from sbom_helpers import validate_file_access
 from analyze_data import bar_image
 
-## For given day graph
-## for each server, sum how many cve packages in each cvss bin
-##    print summary
-
-## input is two environmental variables: GDBPATH
-##    GDBPATH is path to graphdb directory
+## For given day graph, summarize state of non-suppressed, non-multiversion, cve
 ##
+
+## input one environmental variables: GDBPATH
+##    GDBPATH is path to graphdb directory
 
 ## initialize from env
 gdbpath = get_gdbpath()
@@ -77,7 +75,11 @@ cvebins['4. Servers with Low 0 <= CVSS <5'] = len(svr0)
 mypprint(cvebins)
 
 ## print 3 random servers in each class
+print('up to 3 random servers with CVSS=10')
 mypprint(svr10[:3])
+print('up to 3 random servers with 7<=CVSS<10')
 mypprint(svr7[:3])
+print('up to 3 random servers with 5<=CVSS<7')
 mypprint(svr5[:3])
+print('up to 3 random servers with CVSS<5')
 mypprint(svr0[:3])
