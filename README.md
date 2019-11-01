@@ -263,5 +263,7 @@ For a given day, count and bin the cve's.
   * python3 sbom.py
   * python3 make_gdb.py 2019.04.01 ##replacing date with today's
 4 check state of vulnerabilities
-  * ignoring suppressed and clutter for now
-  * python3 check_cve.py 2019.04.01 ##replacing date with today's or whatever
+  * ignoring suppressed and clutter for now (query displays with supr and clutter)
+  * python3 query1_filt_cve.py 2019.04.01 ##replacing date with today's or whatever
+5 look at some of random Servers
+  * python3 query1_svr.py 2019.04.01 id_of_svr
