@@ -333,6 +333,7 @@ def bar_image(data, params):
     plt.figure(figsize=(10,8))
     plt.bar(x_pos, y_data)
 
+
     # zip joins x and y coordinates in pairs
     for x,y in zip(x_pos,y_data):
 
