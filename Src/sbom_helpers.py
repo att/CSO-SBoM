@@ -43,11 +43,9 @@ def current_auth(state):
 
 def get_auth(state):
 	requests.packages.urllib3.disable_warnings()
-	output = 'FW: investigate suppressed request/cert warnings'
-	print(output)
 	current_group = state['current_group']
 	(group_id,user,passwd) = state['group_auth'][current_group]
-
+	print(current_group) #shows current group being processed 
 	auth = user + ":" + passwd
 	auth_bin = auth.encode('ASCII')
 	creds = base64.b64encode(auth_bin)
@@ -60,7 +58,7 @@ def get_auth(state):
 	token_request = requests.post(AUTH_URL, headers=headers, params=parameters, verify=False)
 
 	token = token_request.json()
-
+	print(token_request) #shows HTTP Status 200 (OK) message if request being processed
 	access_token =  token['access_token']
 	expires = token['expires_in'] - 100
 
@@ -147,13 +145,63 @@ def print_servers(state):
 		print(output)
 
 def data_dump(state):
-
 	svr_dict = state['servers']
+	## get data directory
+	datadir = get_datapath()
 	## make filename of "now"
 	d=datetime.datetime.utcnow()
-	format = "Data/svr.%Y.%m.%d.pyt"
+	format = datadir + "svr.%Y.%m.%d.pyt"
 	filename = d.strftime(format)
 	print(filename)
 	pickle_out = open(filename,"wb")
 	pickle.dump(svr_dict, pickle_out)
 	pickle_out.close()
+
+def get_gdbpath():
+    try:
+        gdbpath = os.environ["GDBPATH"]
+    except:
+        print("Error with setup of env GDBPATH")
+        exit()
+    return(gdbpath)
+
+def get_datelist():
+    try:
+        datelist = eval(os.environ["DATELIST"]  )
+    except:
+        print("Error with setup of env DATELIST")
+        exit()
+    return(datelist)
+
+def get_anlpath():
+    try:
+        anlpath = os.environ["ANLPATH"]
+    except:
+        print("Error with setup of env ANLPATH")
+        exit()
+    return(anlpath)
+
+def get_datapath():
+    try:
+        datapath = os.environ["DATAPATH"]
+    except:
+        print("Error with setup of env DATAPATH")
+        exit()
+    return(datapath)
+
+def validate_file_access(filelist):
+	## makes sure all files in filelist are openable
+	for filename in filelist:
+		try:
+			f = open(filename)
+			f.close()
+		except IOError:
+			print('File {0} is not accessible'.format(filename))
+			exit()
+
+def file_to_data(filename):
+    ## open a pyt and return the data in it
+    datafile = open(filename, 'rb')
+    data = pickle.load(datafile)
+    datafile.close()
+    return(data)

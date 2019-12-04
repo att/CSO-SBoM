@@ -35,14 +35,14 @@ For license info see [LICENSE](./LICENSE).
   * [5.2 Design](#52-design)
   * [5.3 Design Decisions](#53-design-decisions)
   * [5.4 SBoM of the SBoM Software](#54-sbom-of-the-sbom-software)
-* [6.Examples](#6-examples)
+* [6. Examples](#6-examples)
   * [6.1 Pull CloudPassage](#61-pull-cloudpassage)
   * [6.2 One day pyt into GraphDB](#62-one-day-pyt-into-graphdb)
   * [6.3 Make an image](#6.3-make-an-image)
   * [6.4 Query one day](#6.4-query-one-day)
   * [6.5 Query to compare two days](#6.5-query-to-compare-two-days)
   * [6.6 Histogram across known dates](#6.6-histogram-across-known-dates)
-
+* [7. Examples](#7-day-in-the-life-of-cyber-security-evangelist)
 
 # 1. Ground Rules
 This section contains the basics on using and contributing to this project.
@@ -120,24 +120,48 @@ fill in from ntia and blog
 # 6. Examples
 
 ## 6.1 Pull CloudPassage
-* set shell env variable with Cloud Passage API keys e.g.
-  * export CLOUDPASSAGEDICT='{ "group1" : ("what", "key1", "000..0"), ..., "groupN" : ("what", "keyN", "000..0") }'
-* pythonw sbom.py
-* verify Data/svr.2019.04.01.pyt was created and is non-zero. But with today's date replacing 2019.04.01. Note UTC is used for determining "today" (so it might be tomorrow or yesterday depending on your timezone).
+* set shell env variables:
+  * export CLOUDPASSAGEDICT='{ "groupname1" : ("ignore", "keyname", "keyvalue"), ..., "lastgrp" : ("mycomment", "02468ace", "13579bdf02468ace13579bdf02468ace") }'
+  * export DATAPATH='path to directory to put pyt data'
+* python3 sbom.py
+* verify $DATAPATH/svr.2019.04.01.pyt was created and is non-zero.
+  * But with today's date replacing 2019.04.01.
+  * Note UTC is used for determining "today"
+    * (so it might be tomorrow or yesterday depending on your timezone).
 * for a more detailed view of the code traversed, see [pull_sbom.md](./Docs/pull_sbom.md)
 
 ## 6.2 One day pyt into GraphDB
-* pythonw make_gdb.py 2019.04.01 ##replacing date of pyt file to create graphdb for
+* set shell env variables:
+  * export DATAPATH='path to directory to get pyt data'
+  * export  GDBPATH='path to directory to put gdb file'
+* python3 make_gdb.py 2019.04.01 ##replacing date of pyt file to create graphdb for
 * verify GraphDB/2019.04.01.gdb (but with today's date replacing 2019.04.01) was created and is non-zero.
 
 ## 6.3 Make an image
-* of cve/package/server map
+### 6.3.1 CVE/packages/servers
+* given a cve show affected packages on affected servers
+### 6.3.2 servers over time by groups
+* given a list of dates, show how many servers in each group in stacked bar graph
+* python3 queryn.numsvrs.py
+* prerequisites:
+  - export GDBPATH='path to directory of GraphDb files'
+  - export ANLPATH='path to directory to put image and data'
+  - export DATELIST='["date1", "date2", ...]
+
 
 ## 6.4 Query one day
-### 6.4.1 server info
-* pythonw query1_svr.py {date} {server}
-    * where {date} is date to one you want to query eg '2019.04.01'
-    * where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
+### 6.4.1 list server by group
+* python3 query1_svr_list.py {date}
+  - where {date} is date to one you want to query eg '2019.04.01'
+  - prerequisites:
+    * export GDBPATH='path to directory of GraphDb files'
+  - returns a print of a python dictionary with key=group, value=serverlist
+### 6.4.2 server info
+* python3 query1_svr.py {date} {server}
+    - where {date} is date to one you want to query eg '2019.04.01'
+    - where {server} is server by how cloudpassage id's eg '84a421cd887f11e887244dfe08192208'
+    - prerequisites:
+      * export GDBPATH='path to directory of GraphDb files'
 * this returns a printout of information:
     * filename of gdb file
     * server ID (as cloudpassage know it)
@@ -158,8 +182,11 @@ fill in from ntia and blog
     * the number of packages with cve of cvss <5 & >=0
 
 ### 6.4.3 multiversion
-* pythonw query1_multiver.py {date} {server}
-    * where {date} is date to one you want to query eg '2019.04.01'
+* python3 query1_multiver.py {date}
+    - where {date} is date to one you want to query eg '2019.04.01'
+    - prerequisites:
+      * export GDBPATH='path to directory of GraphDb files'
+
 * this returns a printout of information:
     * the number of servers with no multiver pakages
     * the number of servers with at least one multi-ver-package
@@ -179,11 +206,14 @@ fill in from ntia and blog
       * (1, "perl-Pod-Simple.x86_64/[':1:3.13-141.el6_7.1', ':1:3.13-144.el6']")
       * meaning 4 servers have 4.1.2-41.el6_8 and 4.1.2-48.el6 versions of bash.x86_64; and 1 server has 1:3.13-141.el6_7.1 and 1:3.13-144.el6 versions of perl-Pod-Simple.x86_64 package
 
+### 6.4.4 Bin Server Counts by CVSS score of CVE present
+For a given day, count and bin the cve's.
+* python3 query1_cve_bin.py {date}
+    - where {date} is date to one you want to query eg '2019.04.01'
+    - prerequisites:
+      * export GDBPATH='path to directory of GraphDb files'
 
-
-
-
-### 6.4.4 fill in rest
+### 6.4.5 fill in rest
 * number servers
 * stacked bar chart by group
 * number packages
@@ -206,8 +236,17 @@ fill in from ntia and blog
 * number servers with supressed CVE of CVSS >N
 
 ## 6.6 Histogram across known dates
-* number servers
-* stacked bar chart by group
+## 6.6.1 Histogram of number of servers(by group) over time
+* python3 queryn_numsvrs.py outfile
+## 6.6.2 Histogram of number of extra versions over time
+* python3 queryn_multiver.py outfile
+## 6.6.3 Histogram of number of servers with supressed cve's over time
+* python3 queryn_sup_cve.py outfile
+## 6.6.4 Histogram of number of attack points over time
+* python3 queryn_cve_bin.py outfile
+## 6.6.5 list dates of raw data and of graphdb
+* python3 queryn_dates.py
+## 6.6.n
 * number packages
 * number CVE's
 * number CVE's > CVSS=N
@@ -215,3 +254,16 @@ fill in from ntia and blog
 * number supressed CVE's
 * number servers with supressed CVE's
 * number servers with supressed CVE of CVSS >N
+# 7. Day in the life of cyber security evangelist
+1. check what dates have data
+  * python3 queryn_dates.py
+2. if any dates have data but not gdb, process them
+  * python3 make_gdb.py 2019.04.01 ##replacing unprocessed date
+3 if today missing data and it is desired, then get it
+  * python3 sbom.py
+  * python3 make_gdb.py 2019.04.01 ##replacing date with today's
+4. check state of vulnerabilities
+  * ignoring suppressed and clutter for now (query displays with supr and clutter)
+  * python3 query1_filt_cve.py 2019.04.01 ##replacing date with today's or whatever
+5. look at some of random Servers
+  * python3 query1_svr.py 2019.04.01 id_of_svr
