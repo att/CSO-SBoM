@@ -45,7 +45,7 @@ def get_auth(state):
 	requests.packages.urllib3.disable_warnings()
 	current_group = state['current_group']
 	(group_id,user,passwd) = state['group_auth'][current_group]
-
+	print(current_group) #shows current group being processed 
 	auth = user + ":" + passwd
 	auth_bin = auth.encode('ASCII')
 	creds = base64.b64encode(auth_bin)
@@ -58,7 +58,7 @@ def get_auth(state):
 	token_request = requests.post(AUTH_URL, headers=headers, params=parameters, verify=False)
 
 	token = token_request.json()
-
+	print(token_request) #shows HTTP Status 200 (OK) message if request being processed
 	access_token =  token['access_token']
 	expires = token['expires_in'] - 100
 
