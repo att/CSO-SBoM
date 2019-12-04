@@ -333,6 +333,17 @@ def bar_image(data, params):
     plt.figure(figsize=(10,8))
     plt.bar(x_pos, y_data)
 
+    # zip joins x and y coordinates in pairs
+    for x,y in zip(x_pos,y_data):
+
+        label = "{:.0f}".format(y)
+
+        plt.annotate(label, # this is the text
+                     (x,y), # this is the point to label
+                     textcoords="offset points", # how to position the text
+                     xytext=(0,10), # distance from text to points (x,y)
+                     ha='center') # horizontal alignment can be left, right or center
+
     plt.title(img_title)
     plt.ylabel(img_ylabel)
     plt.xlabel(img_xlabel)
