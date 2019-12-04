@@ -9,7 +9,9 @@ from load_db import svr_cve_pkgs
 from load_db import pkg_cve_supr
 from load_db import pkg_cve_cvss_threshold
 from load_db import pkgs_with_no_cve
+from sbom_helpers import get_gdbpath
 from sbom_helpers import mypprint
+from sbom_helpers import validate_file_access
 
 if( len(sys.argv) != 3 ):
    print("There should be two arguments")
@@ -20,13 +22,9 @@ else:
    d = sys.argv[1]
    svr = sys.argv[2]
 
-gfile = 'GraphDb/' + d + '.gdb'
-try:
-    f = open(gfile)
-    f.close()
-except IOError:
-    print('File {0} is not accessible'.format(gfile))
-    exit()
+gfile = get_gdbpath() + d + '.gdb'
+#validate gdb file exists
+validate_file_access([gfile])
 
 graphdata = load_graph(gfile)
 
@@ -63,10 +61,10 @@ mypprint(ten_cves)
 
 seven_cves = pkg_cve_cvss_threshold(scp, 7, 10)
 l_seven_cves = len(seven_cves)
-print("{0} packages with worst cvss <10 and >=7".format(l_seven_cves))
+print("{0} packages with cvss <10 and >=7".format(l_seven_cves))
 mypprint(seven_cves)
 
 five_cves = len(pkg_cve_cvss_threshold(scp, 5, 7))
-print("{0} packages with worst cvss <7 and >=5".format(five_cves))
+print("{0} packages with cvss <7 and >=5".format(five_cves))
 low_cves = len(pkg_cve_cvss_threshold(scp, 0, 5))
-print("{0} packages with worst cvss <5 and >=0".format(low_cves))
+print("{0} packages with cvss <5 and >=0".format(low_cves))

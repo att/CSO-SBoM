@@ -5,8 +5,9 @@ from load_db import load_graph
 from sbom_helpers import mypprint
 from load_db import svr_pkgs
 from load_db import intermediate
-from load_db import hostname
-from load_db import group
+from load_db import get_hostname
+from load_db import get_group
+from sbom_helpers import get_gdbpath
 
 
 ## Load one day graph based on input parameter
@@ -21,7 +22,7 @@ if( len(sys.argv) != 2 ):
 else:
    d = sys.argv[1]
 
-gfile = 'GraphDb/' + d + '.gdb'
+gfile = get_gdbpath() + d + '.gdb'
 try:
     f = open(gfile)
     f.close()
@@ -107,7 +108,7 @@ print("===============")
 ## print the servers with zero extras
 out = "the following servers have zero extras:"
 print(out)
-annotated_clean_ver_list = [[ (group(s,graphdata),s,hostname(s,graphdata)) for s in clean_ver_list ]]
+annotated_clean_ver_list = [[ (get_group(s,graphdata),s,get_hostname(s,graphdata)) for s in clean_ver_list ]]
 annotated_clean_ver_list.sort()
 mypprint(annotated_clean_ver_list)
 

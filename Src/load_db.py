@@ -3,7 +3,7 @@
 ## routines for loading data into db
 
 from sbom_helpers import mypprint
-from analyze_data import file_to_data
+from sbom_helpers import file_to_data
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -290,12 +290,27 @@ def pkgs_with_no_cve(pkg_cve):
     return(output)
 
 ## return hostname of a server
-def hostname(server, graphdata):
+def get_hostname(server, graphdata):
     return( intermediate(graphdata, 'type_hostname', server) )
 
 ## return group of a server
-def group(server, graphdata):
+def get_group(server, graphdata):
     return( intermediate(graphdata, 'type_group', server) )
+
+## return list of groups
+def get_groups(graphdata):
+    return( list(graphdata.neighbors("type_group")) )
+
+## divide a list of servers by groups
+def server_by_group(server_list, group_list,graphdata):
+    # return a dictionary key=group, value=list of servers
+    svr_grp_dict = {}
+    for group in group_list:
+        svr_grp_dict[group] = []
+    for svr in server_list:
+        grp = get_group(svr, graphdata)
+        svr_grp_dict[grp].append(svr)
+    return(svr_grp_dict)
 
 ## local helper routines
 
