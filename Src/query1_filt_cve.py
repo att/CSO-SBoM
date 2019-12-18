@@ -8,6 +8,7 @@ from load_db import svr_subset
 from sbom_helpers import get_gdbpath
 from sbom_helpers import validate_file_access
 from analyze_data import bar_image
+import random
 
 ## For given day graph, summarize state of non-suppressed, non-multiversion, cve
 ##
@@ -75,11 +76,15 @@ cvebins['4. Servers with Low 0 <= CVSS <5'] = len(svr0)
 mypprint(cvebins)
 
 ## print 3 random servers in each class
+random.shuffle(svr10)
 print('up to 3 random servers with CVSS=10')
 mypprint(svr10[:3])
+random.shuffle(svr7)
 print('up to 3 random servers with 7<=CVSS<10')
 mypprint(svr7[:3])
+random.shuffle(svr5)
 print('up to 3 random servers with 5<=CVSS<7')
 mypprint(svr5[:3])
+random.shuffle(svr0)
 print('up to 3 random servers with CVSS<5')
 mypprint(svr0[:3])
