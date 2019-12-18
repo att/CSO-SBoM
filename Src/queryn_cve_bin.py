@@ -96,5 +96,6 @@ params['filename'] = outfilename
 params['title'] = 'Attack Points by Date'
 params['ylabel'] = 'Number of package-ver with CVE across all Servers'
 params['xlabel'] = 'Dates'
-params['colors'] = ['yellow', 'orange', 'red', 'black']
+params['colors'] = ['yellow', 'gold', 'orange', 'red'] 
+
 stacked_bar_image(cvebins, params)
