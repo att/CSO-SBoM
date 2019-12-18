@@ -14,6 +14,7 @@ from load_db import get_groups
 from load_db import intermediate
 import numpy
 import matplotlib.pyplot as plt
+import matplotlib as mpl 
 
 def print_dict_struc(data):
     groups = data.keys()
@@ -301,17 +302,30 @@ def stacked_bar_image(data, params):
       this_list = [ bottoms[s-1][d] + seriesList[s-1][d] for d in ld ]
       bottoms.append( this_list )
 
-    plt.figure(figsize=(10,8))
+    fig = plt.figure(figsize=(10,8))
+    ax = fig.add_subplot(111) 
     bars = []
     for i in range(len(seriesList)):
-      bars.append( plt.bar(ind, seriesList[i], bottom=bottoms[i], color=colors[i] ) )
+      bars.append( plt.bar(ind, seriesList[i], bottom=bottoms[i], color=colors[i] ) )    
+
+    slna = numpy.array(seriesList) 
+# search all of the bar segments and annotate
+    for j in range(len(bars)): #adds labels to stacked bar segments
+        for i, patch in enumerate(bars[j].get_children()): 
+            bl = patch.get_xy() 
+            y = 0.5*patch.get_width() + bl[0] 
+            x = 0.5*patch.get_height() + bl[1] 
+            mpl.rcParams['text.color'] = 'black' 
+            mpl.rcParams['font.size'] = 11 
+            mpl.rcParams['font.weight'] = 700  
+            ax.text(y,x, (slna[j,i]), ha='center') 
 
     plt.title(img_title)
     plt.ylabel(img_ylabel)
     plt.xlabel(img_xlabel)
-    plt.xticks(ind, tuple(dates))
+    plt.xticks(ind, tuple(dates)) 
     plt.legend(tuple( [ p[0] for p in bars ] ), tuple(groups))
-
+  
     plt.savefig(outfile)
 
 def bar_image(data, params):
@@ -333,7 +347,6 @@ def bar_image(data, params):
     plt.figure(figsize=(10,8))
     plt.bar(x_pos, y_data)
 
-
     # zip joins x and y coordinates in pairs
     for x,y in zip(x_pos,y_data):
 
@@ -344,10 +357,9 @@ def bar_image(data, params):
                      textcoords="offset points", # how to position the text
                      xytext=(0,10), # distance from text to points (x,y)
                      ha='center') # horizontal alignment can be left, right or center
-
     plt.title(img_title)
     plt.ylabel(img_ylabel)
     plt.xlabel(img_xlabel)
     plt.xticks(x_pos, tuple(x_labels))
-
+#   plt.show()
     plt.savefig(outfile)
