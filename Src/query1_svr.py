@@ -1,9 +1,8 @@
-## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+## Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
 
 import sys
 from load_db import load_graph
 from load_db import intermediate
-from load_db import all_intermediates
 from load_db import svr_pkgs
 from load_db import svr_cve_pkgs
 from load_db import pkg_cve_supr
@@ -64,7 +63,12 @@ l_seven_cves = len(seven_cves)
 print("{0} packages with cvss <10 and >=7".format(l_seven_cves))
 mypprint(seven_cves)
 
-five_cves = len(pkg_cve_cvss_threshold(scp, 5, 7))
-print("{0} packages with cvss <7 and >=5".format(five_cves))
-low_cves = len(pkg_cve_cvss_threshold(scp, 0, 5))
-print("{0} packages with cvss <5 and >=0".format(low_cves))
+five_cves = pkg_cve_cvss_threshold(scp, 5, 7)
+l_five_cves = len(five_cves)
+print("{0} packages with cvss <7 and >=5".format(l_five_cves))
+mypprint(five_cves)
+
+low_cves = pkg_cve_cvss_threshold(scp, 0, 5)
+l_low_cves = len(low_cves)
+print("{0} packages with cvss <5 and >=0".format(l_low_cves))
+mypprint(low_cves)

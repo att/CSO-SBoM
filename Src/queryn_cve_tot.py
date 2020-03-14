@@ -77,17 +77,17 @@ for (d,filename) in filelist:
   svr5 = svr_subset(graphdata, pkg5)
   svr0 = svr_subset(graphdata, pkg0)
 
-  cvebins[d]['1. Worst CVSS=10'] = len(svr10)
-  cvebins[d]['2. Critical 7 <= CVSS <10'] = len(svr7)
-  cvebins[d]['3. Medium 5 <= CVSS <7'] = len(svr5)
-  cvebins[d]['4. Low 0 <= CVSS <5'] = len(svr0)
+  cvebins[d]['1. Worst CVSS=10'] = len(cve10)
+  cvebins[d]['2. Critical 7 <= CVSS <10'] = len(cve7)
+  cvebins[d]['3. Medium 5 <= CVSS <7'] = len(cve5)
+  cvebins[d]['4. Low 0 <= CVSS <5'] = len(cve0)
 
 mypprint(cvebins)
 
 params = {}
 params['filename'] = outfilename
-params['title'] = 'Servers With CVEs by Date'
-params['ylabel'] = 'Number of Servers That Have 1 or more package-versions with a CVE'
+params['title'] = 'CVE Totals by Date'
+params['ylabel'] = 'Total Number of CVEs across all Servers'
 params['xlabel'] = 'Dates'
 params['colors'] = ['yellow', 'gold', 'orange', 'red']
 

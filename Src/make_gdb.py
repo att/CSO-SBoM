@@ -1,4 +1,4 @@
-## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+## Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
 
 ## read pyt and make gdb
 

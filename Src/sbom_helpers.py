@@ -1,10 +1,9 @@
-## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+## Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
 
 ## routines used by sbom (in sep file to remove clutter)
 
 import os, time, base64, requests, pprint, datetime
 import pickle # for storing data blog - remove once going direct to db
-
 
 
 def initialize():
@@ -81,7 +80,7 @@ def process_page_servers(state):
 									   )
 	server_info = server_info_request.json()
 	state['total_items'] = server_info['count']
-	curr_grp = state['current_group']  # shorthand variabl
+	curr_grp = state['current_group']  # shorthand variable
 
 	for item in  server_info['servers']:
 		server = item['id']
