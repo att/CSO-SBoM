@@ -70,7 +70,7 @@ def load_file(filename):
                     one_day_graph.add_node(package_name)
                     one_day_graph.add_edge(package_name, "type_package")
                 relative_package_version = finding['package_version']
-                ## make package_version fully qualified by package group_name
+                ## make package_version fully qualified by package group_name_
                 package_version = package_name + ":" + relative_package_version
                 if package_version not in one_day_graph:
                     one_day_graph.add_node(package_version)
@@ -81,14 +81,14 @@ def load_file(filename):
                 cve_entries = finding['cve_entries']
                 for cve_entry in cve_entries:
                     cve = cve_entry['cve_entry']
-                    cvss = cve_entry['cvss_score']
+					cvss = cve_entry['cvss_score']
                     suppressed = cve_entry['suppressed'] #FW: handle per svr
                     if cve not in one_day_graph:
                         ## make attributes of cvss score and whether suppressed
                         one_day_graph.add_node(cve)
                         one_day_graph.add_edge(cve, "type_cve")
-                        one_day_graph.nodes[cve]['cvss'] = cvss
-                        one_day_graph.nodes[cve]['suppressed'] = suppressed
+                        one_day_graph.nodes[cve_entry]['cvss'] = cvss   #Changed from one_day_graph.nodes[cve]['cvss'] = cvss
+                        one_day_graph.nodes[cve_entry]['suppressed'] = suppressed  #Changed from one_day_graph.nodes[cve]['suppressed'] = suppressed
                     one_day_graph.add_edge(package_version, cve)
                     ## suppression is per server so special node
                     if suppressed:
