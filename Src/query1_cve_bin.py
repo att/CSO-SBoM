@@ -1,4 +1,4 @@
-## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+## Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
 
 import sys
 from load_db import load_graph
@@ -7,7 +7,6 @@ from load_db import pkg_subset
 from load_db import svr_subset
 from sbom_helpers import get_gdbpath
 from sbom_helpers import validate_file_access
-from analyze_data import bar_image
 
 ## For given day graph
 ## for each server, sum how many cve packages in each cvss bin
@@ -69,6 +68,7 @@ svr7 = svr_subset(graphdata, pkg7)
 svr5 = svr_subset(graphdata, pkg5)
 svr0 = svr_subset(graphdata, pkg0)
 
+
 cvebins['1. Servers with Worst CVSS=10'] = len(svr10)
 cvebins['2. Servers with Critical 7 <= CVSS <10'] = len(svr7)
 cvebins['3. Servers with Medium 5 <= CVSS <7'] = len(svr5)
@@ -76,7 +76,8 @@ cvebins['4. Servers with Low 0 <= CVSS <5'] = len(svr0)
 
 mypprint(cvebins)
 
-## print 3 random servers in each class
+## print 3 servers in each class
+
 mypprint(svr10[:3])
 mypprint(svr7[:3])
 mypprint(svr5[:3])

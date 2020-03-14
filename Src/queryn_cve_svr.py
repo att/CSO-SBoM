@@ -82,6 +82,7 @@ for (d,filename) in filelist:
   cvebins[d]['3. Medium 5 <= CVSS <7'] = len(svr5)
   cvebins[d]['4. Low 0 <= CVSS <5'] = len(svr0)
 
+
 mypprint(cvebins)
 
 params = {}

@@ -1,4 +1,4 @@
-##Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+##Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
 
 ## helper routines in diff file to keep this top level simple
 from sbom_helpers import initialize

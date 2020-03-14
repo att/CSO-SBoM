@@ -1,4 +1,4 @@
-## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
+## Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
 
 import sys, os
 from sbom_helpers import get_gdbpath
@@ -19,7 +19,7 @@ datapath = get_datapath()
 
 
 if( len(sys.argv) != 1 ):
-   print("There should no arguments")
+   print("There should be no arguments")
    exit()
 dfilelist = os.listdir(datapath)
 ddatelist = [ f[-14:-4] for f in dfilelist if(( f[-4:] == '.pyt') and (f[:4] == 'svr.') ) ]
