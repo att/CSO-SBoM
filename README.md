@@ -1,6 +1,6 @@
 ## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
 
-# Astra-SBoM
+# CSO-SBoM
 Routines to assist in creating and using Software Bill of Materials for Astra.
 This is a work in progress and probably
 not ready to be much use to others as yet, but hopefully will be soon.
