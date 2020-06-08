@@ -1,9 +1,10 @@
-## Copyright (c) 2020 AT&T Intellectual Property. All rights reserved.
+## Copyright (c) 2019 AT&T Intellectual Property. All rights reserved.
 
 ## routines used by sbom (in sep file to remove clutter)
 
 import os, time, base64, requests, pprint, datetime
 import pickle # for storing data blog - remove once going direct to db
+
 
 
 def initialize():
@@ -17,6 +18,7 @@ def initialize():
 	state['BASE_URL'] = "https://api.aglet.cloudpassage.com"
 	state['AUTH_URL'] = state['BASE_URL'] + "/oauth/access_token"
 	state['SERVER_INFO_URL'] = state['BASE_URL'] + "/v1/servers"
+	state['ISSUES_INFO_URL'] = state['BASE_URL'] + "/v3/issues"
 	state['page_size'] = 5
 	state['page_num'] = 1
 	state['servers'] = {}
@@ -44,7 +46,7 @@ def get_auth(state):
 	requests.packages.urllib3.disable_warnings()
 	current_group = state['current_group']
 	(group_id,user,passwd) = state['group_auth'][current_group]
-	print(current_group) #shows current group being processed 
+	print(current_group)
 	auth = user + ":" + passwd
 	auth_bin = auth.encode('ASCII')
 	creds = base64.b64encode(auth_bin)
@@ -57,7 +59,7 @@ def get_auth(state):
 	token_request = requests.post(AUTH_URL, headers=headers, params=parameters, verify=False)
 
 	token = token_request.json()
-	print(token_request) #shows HTTP Status 200 (OK) message if request being processed
+	print(token_request)
 	access_token =  token['access_token']
 	expires = token['expires_in'] - 100
 
@@ -80,7 +82,7 @@ def process_page_servers(state):
 									   )
 	server_info = server_info_request.json()
 	state['total_items'] = server_info['count']
-	curr_grp = state['current_group']  # shorthand variable
+	curr_grp = state['current_group']  # shorthand variabl
 
 	for item in  server_info['servers']:
 		server = item['id']

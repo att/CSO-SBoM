@@ -60,7 +60,6 @@ def load_file(filename):
                 one_day_graph.add_edge(server, group)
                 one_day_graph.add_edge(server, hostname)
                 one_day_graph.add_edge(server, server_label)
-
             ## grab the findings for this server
             findings = data[group][server]['svm']['scan']['findings']
             ## go thru each finding of this server and update package
@@ -121,7 +120,6 @@ def info_graph(one_day_graph):
         num_svrs = len(one_day_graph.edges(group)) - 1
         output = "   number of {0} servers = {1}".format(group,num_svrs)
         print(output)
-
 
     ##    number of unique packages is number of edges to type_package
     num_pkgs = len(one_day_graph.edges("type_package"))
