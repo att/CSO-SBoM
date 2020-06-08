@@ -8,7 +8,7 @@ from load_db import svr_subset
 from sbom_helpers import get_gdbpath
 from sbom_helpers import get_datelist
 from sbom_helpers import validate_file_access
-from sbar_img import stacked_bar_image
+from mline_img import multi_line_image
 
 ## Load each day graph
 ## for each server, sum how many cve packages in each cvss bin
@@ -77,10 +77,10 @@ for (d,filename) in filelist:
   svr5 = svr_subset(graphdata, pkg5)
   svr0 = svr_subset(graphdata, pkg0)
 
-  cvebins[d]['1. Worst CVSS=10'] = len(cve10)
-  cvebins[d]['2. Critical 7 <= CVSS <10'] = len(cve7)
-  cvebins[d]['3. Medium 5 <= CVSS <7'] = len(cve5)
-  cvebins[d]['4. Low 0 <= CVSS <5'] = len(cve0)
+  cvebins[d]['1. Worst CVSS=10'] = len(pkg10)
+  cvebins[d]['2. Critical 7 <= CVSS <10'] = len(pkg7)
+  cvebins[d]['3. Medium 5 <= CVSS <7'] = len(pkg5)
+  cvebins[d]['4. Low 0 <= CVSS <5'] = len(pkg0)
 
 #mypprint (len(svr10)) #- added
 #mypprint (len(svr7)) #- added
@@ -92,9 +92,11 @@ mypprint(cvebins)
 
 params = {}
 params['filename'] = outfilename
-params['title'] = 'CVE Totals by Date'
-params['ylabel'] = 'Total Number of CVEs across all Servers'
+params['title'] = 'Vulnerable Packages by Date'
+params['ylabel'] = 'Total Number of Packages Containing CVEs Across All Servers'
 params['xlabel'] = 'Dates'
-params['colors'] = ['yellow', 'gold', 'orange', 'red']
+params['colors'] = ['lime', 'gold', 'blueviolet', 'red']
+# linestyles can be str 'dotted' or tuple (0, (1, 5))
+params['linestyle'] = [(0, (1, 2)), (0, (3, 1, 1, 1)), (0, (5, 3)), 'solid']
 
-stacked_bar_image(cvebins, params)
+multi_line_image(cvebins, params)

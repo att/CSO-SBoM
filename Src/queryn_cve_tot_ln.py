@@ -8,7 +8,7 @@ from load_db import svr_subset
 from sbom_helpers import get_gdbpath
 from sbom_helpers import get_datelist
 from sbom_helpers import validate_file_access
-from sbar_img import stacked_bar_image
+from mline_img import multi_line_image
 
 ## Load each day graph
 ## for each server, sum how many cve packages in each cvss bin
@@ -95,6 +95,8 @@ params['filename'] = outfilename
 params['title'] = 'CVE Totals by Date'
 params['ylabel'] = 'Total Number of CVEs across all Servers'
 params['xlabel'] = 'Dates'
-params['colors'] = ['yellow', 'gold', 'orange', 'red']
+params['colors'] = ['lime', 'gold', 'blueviolet', 'red']
+# linestyles can be str 'dotted' or tuple (0, (1, 5))
+params['linestyle'] = [(0, (1, 2)), (0, (3, 1, 1, 1)), (0, (5, 3)), 'solid']
 
-stacked_bar_image(cvebins, params)
+multi_line_image(cvebins, params)
